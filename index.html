@@ -1,1 +1,22 @@
-Hi, my name is 王扬帆(wáng yáng fān).
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Wang Yangfan's Homepage</title>
+</head>
+<body>
+<h1>Wang Yangfan</h1>
+<p>I am a PhD candidate in computer science and technology at Harbin Institute of Technology(HIT).</p>
+<p>My area of interest is privacy-preserving digital contact tracing.</p>
+
+<footer>
+    <p id="lovedays"></p>
+</footer>
+</body>
+<script>
+    var now_date = new Date()
+    var love_date = new Date("2021/12/18")
+    var day = parseInt((now_date-love_date) / (1000 * 60 * 60 * 24)) + 1;
+    document.getElementById("lovedays").innerHTML = "our time: "+day;
+</script>
+</html>

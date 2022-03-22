@@ -15,7 +15,8 @@ css1 = '''
         }
     </style>
 </head>
-<body>'''
+<body>
+'''
 css2 = '''
 </body>
 </html>'''

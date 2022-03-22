@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <title>Hello - WangYangfan
+    </title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Cambria, serif;
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<img src="yangyang&vv.jpg" style="width: 30%">
+<i><p>Hold your hand, day and night,<br>
+    hold your hand, waiting for tomorrow,<br>
+    hold your hand, through this life,<br>
+    hold your hand, life.<br></p></i>
+<p id="lovedays"></p>
+</body>
+<script>
+    var now_date = new Date()
+    var love_date = new Date("2021/12/18")
+    var day = parseInt((now_date-love_date) / (1000 * 60 * 60 * 24)) + 1;
+
+    document.getElementById("lovedays").style.cssText = "color: hotpink;"
+    document.getElementById("lovedays").innerHTML = "♥ "+day+" days ♥";
+</script>
+</html>

@@ -5,8 +5,7 @@ css0 = '''<!DOCTYPE html>
 <html lang=en>
 <head>
     <title>'''
-css1 = '''
-    </title>
+css1 = '''</title>
     <meta charset="utf-8">
     <style>
         body {

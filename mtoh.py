@@ -11,6 +11,7 @@ css1 = '''
     <style>
         body {
             font-family: Cambria, serif;
+            font-size: 20px;
         }
     </style>
 </head>

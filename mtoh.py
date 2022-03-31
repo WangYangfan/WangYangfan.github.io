@@ -9,7 +9,7 @@ css1 = '''</title>
     <meta charset="utf-8">
     <style>
         body {
-            font-family: Cambria, serif;
+            font-family: Cambria, STXihei, serif;
             font-size: 20px;
         }
     </style>

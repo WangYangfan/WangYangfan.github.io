@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <title>1-1 - WangYangfan</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Cambria, STXihei, serif;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<blockquote>
+<p>Date: 2022/8/30</p>
+<p>Author: WangYangfan</p>
+<p>Paper Title: Tactical provenance analysis for endpoint detection and response systems</p>
+<p>终端检测和响应系统的战术来源分析</p>
+</blockquote>
+<p><strong>背景</strong></p>
+<p>EDR 工具当前面临三大挑战</p>
+<ul>
+<li>
+<p>EDR  工具的大量误报使得调查分析任务困难</p>
+</li>
+<li>
+<p>确定威胁警报的准确性需要繁琐的人工分析</p>
+</li>
+<li>
+<p>日志在主机的保留造成巨大的资源负担</p>
+</li>
+</ul>
+<p><strong>本文贡献</strong></p>
+<ul>
+<li>
+<p>引入战术起源图 TPG 的概念，对 EDR 生成的威胁警报之间的因果依赖关系进行推理，代替对低级系统时间依赖进行编码</p>
+</li>
+<li>
+<p>提出了一种基于 TPG 的威胁评分算法对威胁警报进行排名</p>
+</li>
+<li>
+<p>提出了一种日志压缩技术（回溯剪枝），以减少主机上日志的保留</p>
+</li>
+</ul>
+<p><strong>主要思想</strong></p>
+<ul>
+<li>
+<p>图结构数据：图概念的应用，将端点（主机）上的系统日志解析为图结构</p>
+</li>
+<li>
+<p>集中上传处理：各个端点上传自身日志图到中央数据库</p>
+</li>
+<li>
+<p>图数据提取：中央图数据库上提取关键因果图</p>
+</li>
+<li>
+<p>评价机制：依据提取后的关键因果信息进行威胁评分</p>
+</li>
+<li>
+<p>回溯剪枝：端点（主机）在每次配置时间后进行图回溯剪枝，保留端点上的骨架信息</p>
+</li>
+</ul>
+<p><strong>相关概念</strong></p>
+<p>Endpoint Detection Response (EDR)</p>
+<ul>
+<li>端点检测和响应，将系统事件与已知的对抗行为相匹配，并提供对复杂入侵的可见性</li>
+<li>主机安装客户端 Agent 持续监控主机上的活动，观察潜在恶意行为，发出威胁警报和响应</li>
+</ul>
+<p>Advanced Persistent Threats (APT)</p>
+<ul>
+<li>
+<p>高级持续威胁，离地生存，攻击者长期潜伏在企业网络，以在发起破坏性攻击之前扩大其影响范围</p>
+</li>
+<li>
+<p>EDR 可以应对 APT</p>
+</li>
+</ul>
+<p>Tactics, Techniques, and Procedures (TTPs)</p>
+<ul>
+<li>
+<p>战术、技术和程序，是描述低级攻击模式的人工指定的专家规则</p>
+</li>
+<li>
+<p>TTP 是分层的：战术策略，描述了攻击者执行给定操作的原因；</p>
+</li>
+<li>
+<p>技术和程序，描述了执行操作的方式</p>
+</li>
+</ul>
+<p>Tactical Provenance Graph (TPG)</p>
+<ul>
+<li>
+<p>战术来源图，对 EDR 生成的威胁警报之间的因果依赖关系进行推理，代替对低级系统时间依赖进行编码</p>
+</li>
+<li>
+<p>维护一个最低限度的骨架图，提供现有和未来威胁警报之间的链接</p>
+</li>
+<li>
+<p>为分析师提供多阶段攻击可视化，加速调查的效率</p>
+</li>
+<li>
+<p>基于 TPG 提出了一种威胁评分方法解决 EDR 误报问题</p>
+</li>
+</ul>
+<p><strong>主要内容</strong></p>
+</body>
+</html>

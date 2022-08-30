@@ -20,10 +20,11 @@ css2 = '''
 </body>
 </html>'''
 name = sys.argv[1]
+print(name)
 in_file = '%s.md' % (name)
-in_file = "./notes/"+in_file
+in_file = "./"+in_file
 out_file = '%s.html' % (name)
-out_file = "./notes/"+out_file
+out_file = "./"+out_file
 md = codecs.open(in_file, mode="r", encoding="utf-8")
 html = markdown.markdown(md.read())
 output_file = codecs.open(out_file, "w", encoding="utf-8")

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <title>1-3 - WangYangfan</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Cambria, STXihei, serif;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<blockquote>
+<p>Date: 2022/8/30</p>
+<p>Author: WangYangfan</p>
+<p>Paper Title: SpreadGNN: Serverless Multi-task Federated Learning for Graph Neural Networks</p>
+<p>SpreadGNN：图神经网络的无服务器多任务联邦学习</p>
+</blockquote>
+<p><strong>背景</strong></p>
+<ul>
+<li>
+<p>图神经网络是解决图机器问题的首选方法，但是由于隐私、监管和商业竞争，无法将大量真实世界的图数据集用于 GNN 训练</p>
+</li>
+<li>
+<p>联邦学习无需中心化，用于解决数据孤岛问题，但是联邦学习中图神经网络的设置是模糊的，现有的联邦 GNN 学习没有考虑去中心化的图学习</p>
+</li>
+<li>
+<p>适应于去中心化联邦学习设置的 SGD 优化机制有待研究</p>
+</li>
+</ul>
+<p><strong>本文贡献</strong></p>
+<ul>
+<li>
+<p>首次能够在存在部分标签和无中央服务器的情况下，将联邦多任务学习扩展到现实 GNN 的无服务器设置</p>
+</li>
+<li>
+<p>提出一种具有收敛保证的新型优化算法，分散式周期平均 SGD(DPA-SGD) 来解决分散式多任务学习问题</p>
+</li>
+<li>
+<p>SpreadGNN 的性能优于依赖中央服务器的联邦 GNN 学习</p>
+</li>
+</ul>
+<p><strong>主要思想</strong></p>
+<ul>
+<li>
+<p>研究图神经网络</p>
+</li>
+<li>
+<p>无中心化联邦学习</p>
+</li>
+<li>
+<p>多任务学习</p>
+</li>
+<li>
+<p>优化算法 DPA-SGD 提供收敛保证</p>
+</li>
+</ul>
+<p><strong>相关概念</strong></p>
+<p>Federated Learning (FL)</p>
+<ul>
+<li>
+<p>联邦学习，一种分布式机器学习技术，在多个拥有本地数据的客户端之间进行分布式模型训练，在不需要交换本地原始数据的前提下，仅通过交换模型参数或中间结果的方式，共同协作学习训练模型</p>
+</li>
+<li>
+<p>解决数据孤岛问题，保护各客户端原始数据的隐私，实现隐私保护与数据共享的平衡</p>
+</li>
+</ul>
+<p>Graph Neural Network (GNN)</p>
+<ul>
+<li>图神经网络，使用神经网络来学习图结构数据，提出和发掘图结构数据中的特征和模式，满足聚类、分类、预测、分割、生成等图学习任务需求的算法总称</li>
+<li>图神经网络划主要分为五大类别，分别是：图卷积网络（Graph Convolution Networks，GCN）、图注意力网络（Graph Attention Networks）、图自编码器（ Graph Autoencoders）、图生成网络（ Graph Generative Networks）和图时空网络（Graph Spatial-temporal Networks）</li>
+</ul>
+<p>Multi-task Learning (MTL)</p>
+<ul>
+<li>多任务学习，将多个相关的任务，设计一个模型，一起并行学习</li>
+<li>MTL 优势</li>
+<li>内存量占用减少，多个任务共享一个模型</li>
+<li>推理速度提升，多个任务一次前向计算得出结果</li>
+<li>关联的任务相互促进，通过共享信息，相互补充，提升彼此表现</li>
+</ul>
+<p>Stochastic Gradient Descent (SGD)</p>
+<ul>
+<li>随机梯度下降</li>
+</ul>
+<p>Decentralized Periodic Averaging SGD</p>
+<ul>
+<li>
+<p>分散式周期平均的随机梯度下降</p>
+</li>
+<li>
+<p>每个客户端在本地应用 SGD，并在每 t 次迭代发生的通信轮中仅与其邻居同步所有参数</p>
+</li>
+</ul>
+<p>Ablation Study</p>
+<ul>
+<li>消融实验（研究），在论文最终提出的模型上，减少一些改进特征，以验证改进特征的必要性</li>
+</ul>
+<p><strong>主要内容</strong></p>
+<p>Introduction</p>
+<ul>
+<li>
+<p>介绍图神经网络，可以将结构知识提取为具有高度代表性的嵌入</p>
+</li>
+<li>
+<p>介绍多任务学习，训练的图结果可以有多个标签</p>
+</li>
+<li>
+<p>介绍联邦学习，一种分布式学习范式，通过协作训练解决数据隔离问题</p>
+</li>
+<li>
+<p>联邦学习中训练 GNN 的挑战和缺点，在 non-IID 设置中表现不佳，以及无中心联邦学习的重要性</p>
+</li>
+<li>
+<p>本文提出的 SpreadGNN 多任务联邦学习框架，在存在部分标签和无中央服务器的情况下运行</p>
+</li>
+<li>
+<p>本文提出一种多任务学习 MTL 公式，从部分标签中学习</p>
+</li>
+<li>
+<p>在提出的 MTL 模型中，利用分散式周期平均随机梯度下降算法 DPA-SGD 求解无服务器 MTL 优化问题，并为 DPA-SGD 的收敛性提供了理论保证，进一步验证了设计的合理性</p>
+</li>
+<li>
+<p>测试全部客户端通信和部分客户端通信的情况下，SpreadGNN 的性能都比 FedAvg 更好</p>
+</li>
+</ul>
+<p>Related Works</p>
+<ul>
+<li>
+<p>学习分子表示，将分子中原子的邻居编码为固定长度的向量，以获得向量空间表示</p>
+</li>
+<li>
+<p>介绍联邦学习和联邦 GNN 的相关工作</p>
+</li>
+<li>
+<p>介绍 SGD 优化，同步小批量 SGD，分散 SGD，异步 SGD</p>
+</li>
+</ul>
+<p>SpreadGNN Framework</p>
+<ul>
+<li>
+<p>用于图级学习的联邦学习</p>
+</li>
+<li>
+<p>在位于边缘服务器上的去中心化图数据集的联邦学习中学习图级表示。每个客户端有一个带读出的 GNN，用于学习图级表示</p>
+</li>
+<li>
+<p>理论建立在消息传递神经网络框架，首先使用当前节点和它邻居的的隐藏状态及边特征生成的消息进行消息聚合得到节点的聚合特征，然后使用聚合特征与该节点的隐藏状态进行状态更新得到下一层该节点的隐藏状态，经过若干 GNN 层传播后经过读出函数读出</p>
+</li>
+<li>
+<p>读出由两个神经网络组成，池化函数和任务分类器，池化函数学习给定节点嵌入的单个图嵌入，任务分类器使用图级嵌入预测图标签</p>
+</li>
+<li>
+<p>遇到了问题，一是客户端分散而没有中央服务器，二是设置的客户端拥有不完整标签需要进行联邦多任务学习，但是联邦多任务学习能推广到非凸深度模型（如 GNN）</p>
+</li>
+<li>
+<p>带中央服务器的 GNN 联邦多任务学习</p>
+</li>
+<li>
+<p>将集中式联邦图多任务学习问题 FedGMTL 定义为，在损失函数后加上一个关联其他客户端任务的任务关系正则化项，决定两个任务的关系密切程度</p>
+</li>
+<li>由于每个客户端可能只有一部分任务，但仍需在测试时对其标签中没有的任务进行预测，这个任务关系正则化项可以将客户端自己的任务与其他客户端的任务关联起来</li>
+<li>
+<p>需要注意，每个客户端的学习任务保持相同，但 SpreadGNN 中的聚合过程不同</p>
+</li>
+<li>
+<p>无中央服务器的 GNN 联邦多任务学习</p>
+</li>
+<li>
+<p>一种新的优化方法 DPA-SGD，主要思想是每个客户端本地应用 SGD，并在每 t 次迭代发生的通信轮中仅与其邻居同步所有参数</p>
+</li>
+<li>
+<p>分散系统中由于客户端连接的不稳定性，不适合维护一个单一的任务协方差矩阵，而是在每个客户端中使用不同的协方差矩阵</p>
+</li>
+<li>
+<p>DPA-SGD 收敛性</p>
+</li>
+</ul>
+<p><strong>实验</strong></p>
+<p>实验环境：模型建立在 FedML 框架和 PyTorch 上，使用 MoleculeNet 机器学习基准的分子数据集，分别在两种不同的 GNN 架构 GraphSAGE 和 GAT 上进行实验，对所有客户端的邻居进行消融研究，将依赖中央服务器的 FedAvg 系统作为比较的 baseline</p>
+<p>实验结果：</p>
+<ul>
+<li>
+<p>SpreadGNN 的性能优于使用 FedAvg 的集中式联邦学习系统，可以消除中心服务器的依赖，并使客户端在各自标签存在缺失的情况下更有效地学习</p>
+</li>
+<li>
+<p>结果证明，所提出的框架与 GNN 模式的类型无关</p>
+</li>
+</ul>
+</body>
+</html>
